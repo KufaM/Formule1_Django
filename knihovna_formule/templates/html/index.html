@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Formule 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/media/background.jpg") center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 40px;
+            color: rgb(0, 216, 224);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .menu {
+            text-align: center;
+        }
+        .menu a {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formule 1</h1>
+    <div class="menu">
+        <a href="{% url 'driver_list_grouped' %}">Drivers</a>
+        <a href="{% url 'team_list' %}">Teams</a>
+        <a href="{% url 'track_list' %}">Race Circuits</a>
+    </div>
+</body>
+</html>

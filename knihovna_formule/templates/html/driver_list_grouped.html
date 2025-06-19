@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <title>Drivers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 40px;
+            color: black;
+        }
+        h1 {
+            color: red;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid red;
+            padding-bottom: 5px;
+        }
+        .team-header img {
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 8px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            background: white;
+        }
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #c10000;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            border: 1px solid white;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        li img.driver-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            background: white;
+        }
+        li a {
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        a.back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: red;
+            font-weight: bold;
+        }
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seznam jezdců podle týmů</h1>
+    {% for group in data %}
+        <div class="team-header">
+            {% if group.team.image %}
+                <img src="{{ group.team.image.url }}" alt="{{ group.team.name }} logo" />
+            {% endif %}
+            <div class="team-name">{{ group.team.name }} ({{ group.team.country }})</div>
+        </div>
+        <ul>
+            {% for driver in group.drivers %}
+                <li>
+                    {% if driver.image %}
+                        <img src="{{ driver.image.url }}" alt="{{ driver.first_name }} {{ driver.last_name }}" class="driver-photo" />
+                    {% endif %}
+                    <a href="{% url 'driver_detail' driver.pk %}">
+                        {{ driver.first_name }} {{ driver.last_name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'index' %}" class="back-link">Zpět na domovskou stránku</a>
+</body>
+</html>

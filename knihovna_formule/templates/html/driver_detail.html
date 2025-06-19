@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ driver.first_name }} {{ driver.last_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: white;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .driver-image {
+            display: block;
+            max-width: 300px;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 20px auto;
+        }
+        .info-item {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: grey;
+        }
+        .info-label {
+            font-weight: bold;
+            color: red;
+        }
+        .bio {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            white-space: pre-line;
+            margin-top: 20px;
+        }
+        a.back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+        }
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ driver.first_name }} {{ driver.last_name }}</h1>
+        {% if driver.image %}
+            <img src="{{ driver.image.url }}" alt="{{ driver.first_name }} {{ driver.last_name }}" class="driver-image" />
+        {% endif %}
+
+        <p class="info-item"><span class="info-label">Team:</span> {{ driver.team.name }}</p>
+        <p class="info-item"><span class="info-label">Country:</span> {{ driver.country}}</p>
+        <p class="info-item"><span class="info-label">Date Of Birth :</span> {{ driver.date_of_birth|date:"d.m.Y" }}</p>
+        <p class="info-item"><span class="info-label">Wins:</span> {{ driver.wins }}</p>
+
+        {% if driver.bio %}
+            <div class="bio">{{ driver.bio }}</div>
+        {% else %}
+            <p>K tomuto řidiči jsem autobiografii nenapsal, podívejte se popřípadě na jezdce jménem Max Verstappen.</p>
+        {% endif %}
+        
+        <a href="{% url 'driver_list_grouped' %}" class="back-link">Zpět na seznam jezdců</a>
+    </div>
+</body>
+</html>

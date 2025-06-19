@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>F1 Teams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgray;
+            margin: 40px;
+            color: darkgrey;
+        }
+        h1 {
+            color: red;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .teams-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            
+            padding: 20px;
+            width: 260px;
+            text-align: center;
+            transition: transform 0.3s ease,
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 10px 25px black;
+        }
+        .team-card img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0px 3px 8px black;
+        }
+        .team-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: blue;
+        }
+        .team-info {
+            font-size: 1rem;
+            color: black;
+        }
+        a.back-link {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: red;            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        a.back-link:hover {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>F1 Teams</h1>
+    <div class="teams-list">
+        {% for team in teams %}
+        <div class="team-card">
+            {% if team.image %}
+                <img src="{{ team.image.url }}" alt="{{ team.name }}">
+            {% endif %}
+            <div class="team-name">{{ team.name }}</div>
+            <div class="team-info">{{ team.country }} (Founded: {{ team.founded_year }})</div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'index' %}" class="back-link">Back</a>
+</div>
+</body>
+</html>
